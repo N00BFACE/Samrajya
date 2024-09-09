@@ -1,22 +1,33 @@
-import './App.css'
+import React, { useState } from 'react';
+import './App.css';
+import StartNewGame from './startNewGame';
 
 function App() {
-	return (
-		<>
-			<h1 className='title'>Samrajya</h1>
-			<div className="card">
-				<button
-					className="btn"
-					onClick={() => {
-						window.location.reload()
-					}}
-				>Start a new game</button>
-				<button className="btn">Join a game</button>
-				<button className="btn">Settings</button>
-				<button className="btn">About</button>
-			</div>
-		</>
-	)
+    const [showStartNewGame, setShowStartNewGame] = useState(false);
+
+    const handleStartNewGameClick = () => {
+        setShowStartNewGame(true);
+    };
+
+    const handleBackClick = () => {
+        setShowStartNewGame(false);
+    };
+
+    return (
+        <>
+            <h1 className='title'>Samrajya</h1>
+            {!showStartNewGame && (
+                <div className="card">
+                    <button className="btn" onClick={handleStartNewGameClick}>Start a new game</button>
+                    <button className="btn">Join a game</button>
+                    <button className="btn">Settings</button>
+                    <button className="btn">How to Play?</button>
+                    <button className="btn">About</button>
+                </div>
+            )}
+            {showStartNewGame && <StartNewGame onBackClick={handleBackClick} />}
+        </>
+    );
 }
 
-export default App
+export default App;
