@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './startNewGame.css';
 
 const getRandomColor = (usedColors) => {
@@ -13,11 +14,12 @@ const getRandomColor = (usedColors) => {
     return color;
 };
 
-const StartNewGame = ({ onBackClick }) => {
+const StartNewGame = () => {
     const [playerName, setPlayerName] = useState('');
     const [numPlayers, setNumPlayers] = useState(4);
     const [playerColors, setPlayerColors] = useState([]);
     const [gameLink, setGameLink] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const initialColors = [];
@@ -77,7 +79,7 @@ const StartNewGame = ({ onBackClick }) => {
                     <button onClick={() => navigator.clipboard.writeText(gameLink)}>Copy Link</button>
                 </div>
             )}
-            <button className="btn" onClick={onBackClick}>Back</button>
+            <button className="btn" onClick={() => navigate('/')}>Back</button>
         </div>
     );
 };

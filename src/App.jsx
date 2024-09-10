@@ -1,32 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import StartNewGame from './startNewGame';
 
 function App() {
-    const [showStartNewGame, setShowStartNewGame] = useState(false);
-
-    const handleStartNewGameClick = () => {
-        setShowStartNewGame(true);
-    };
-
-    const handleBackClick = () => {
-        setShowStartNewGame(false);
-    };
-
     return (
-        <>
-            <h1 className='title'>Samrajya</h1>
-            {!showStartNewGame && (
-                <div className="card">
-                    <button className="btn" onClick={handleStartNewGameClick}>Start a new game</button>
-                    <button className="btn">Join a game</button>
-                    <button className="btn">Settings</button>
-                    <button className="btn">How to Play?</button>
-                    <button className="btn">About</button>
-                </div>
-            )}
-            {showStartNewGame && <StartNewGame onBackClick={handleBackClick} />}
-        </>
+        <Router>
+            <div>
+                <h1 className='title'>Samrajya</h1>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/start-new-game" element={<StartNewGame />} />
+                </Routes>
+            </div>
+        </Router>
+    );
+}
+
+function Home() {
+    return (
+        <div className="card">
+            <Link to="/start-new-game">
+                <button className="btn">Start a new game</button>
+            </Link>
+            <button className="btn">Join a game</button>
+            <button className="btn">Settings</button>
+            <button className="btn">How to Play?</button>
+            <button className="btn">About</button>
+        </div>
     );
 }
 
